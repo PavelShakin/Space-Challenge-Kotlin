@@ -1,6 +1,8 @@
 package com.example.spacechallengekotlin
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.spacechallengekotlin.rocket.U1
 import com.example.spacechallengekotlin.rocket.U2
 import com.example.spacechallengekotlin.rocket.Rocket
@@ -11,16 +13,16 @@ import java.util.*
 
 class Simulation(private val mContext: Context) {
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun loadItems(path: String): ArrayList<Item> {
         val items = ArrayList<Item>()
-        val am = mContext.assets
+        val assetManager = mContext.assets
 
         try {
-            am.open(path).use { reader ->
+            assetManager.open(path).use { reader ->
                 BufferedReader(InputStreamReader(reader)).use { br ->
-                    var line: String
 
-                    while (br.readLine().also { line = it } != null) {
+                    for (line: String in br.lines()) {
                         val ln = line.split("=").toTypedArray()
                         val item = Item()
                         item.name = ln[0]
