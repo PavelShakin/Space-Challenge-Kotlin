@@ -1,14 +1,11 @@
 package com.example.spacechallengekotlin.rocket
 
-class U1 : Rocket() {
+class U1(cost: Int = 100,
+         rocketWeight: Int = 10000,
+         maxWeight: Int = 18000) : Rocket(cost, rocketWeight, maxWeight) {
+
     private val launchChance = 0.05
     private val landChance = 0.01
-
-    init {
-        cost = 100
-        rocketWeight = 10000
-        maxWeight = 18000
-    }
 
     override fun launch(): Boolean {
         val coefficient = rocketWeight / maxWeight
