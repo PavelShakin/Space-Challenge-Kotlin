@@ -2,9 +2,9 @@ package com.example.spacechallengekotlin.rocket
 
 import com.example.spacechallengekotlin.Item
 
-open class Rocket (open var cost: Int,
-                   open var rocketWeight: Int,
-                   open var maxWeight: Int) : Spaceship {
+open class Rocket (val cost: Int,
+                   var rocketWeight: Int,
+                   val maxWeight: Int) : Spaceship {
 
     override fun launch(): Boolean = true
 
