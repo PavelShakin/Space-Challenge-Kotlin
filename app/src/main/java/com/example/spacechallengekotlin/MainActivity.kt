@@ -1,14 +1,17 @@
 package com.example.spacechallengekotlin
 
 import android.annotation.SuppressLint
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.example.spacechallengekotlin.rocket.U1
 import com.example.spacechallengekotlin.rocket.U2
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +28,14 @@ class MainActivity : AppCompatActivity() {
         val u2Phase2: ArrayList<U2> = simulation.loadU2(phase2)
 
         val result = findViewById<TextView>(R.id.txtResult)
-        result.text = "U1 first phase budget = " + simulation.runSimulation(u1Phase1)
-            .toString() + "\nU1 second phase budget = " + simulation.runSimulation(u1Phase2)
-            .toString() + "\nU2 first phase budget = " + simulation.runSimulation(u2Phase1)
-            .toString() + "\nU2 second phase budget = " + simulation.runSimulation(u2Phase2)
+        val u1Phase1Budget = "U1 first phase budget = "
+        val u1Phase2Budget = "\nU1 second phase budget = "
+        val u2Phase1Budget = "\nU2 first phase budget = "
+        val u2Phase2Budget = "\nU2 second phase budget = "
+        result.text = u1Phase1Budget.plus(simulation.runSimulation(u1Phase1).toString())
+            .plus(u1Phase2Budget).plus(simulation.runSimulation(u1Phase2).toString())
+            .plus(u2Phase1Budget).plus(simulation.runSimulation(u2Phase1).toString())
+            .plus(u2Phase2Budget).plus(simulation.runSimulation(u2Phase2).toString())
     }
 
     companion object {
